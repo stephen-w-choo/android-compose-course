@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Pixel Art Space</string>
+    <string name="ramen_1_description">Pixel art, made by Dall-E</string>
+    <string name="ramen_2_description">Pixel art, made by Midjourney</string>
+    <string name="ramen_3_description"></string>
+    <string name="torii_1_description"></string>
+    <string name="torii_2_description"></string>
+</resources>
