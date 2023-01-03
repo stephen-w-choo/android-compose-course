@@ -4,10 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -86,7 +83,7 @@ fun PixelArtApp() {
     var currentArtResourceIndex by remember { mutableStateOf(0) }
 
     val changeCurrentArtResourceIndex: (Int) -> Unit = {
-        currentArtResourceIndex = (currentArtResourceIndex + it) % artResources.size
+        currentArtResourceIndex = ((currentArtResourceIndex + it) + artResources.size) % artResources.size
     }
 
     Column(
@@ -94,7 +91,8 @@ fun PixelArtApp() {
     ) {
         Image(
             modifier = Modifier
-                .padding(32.dp),
+                .padding(32.dp)
+                .weight(1f),
             painter = painterResource(id = artResources[currentArtResourceIndex].art),
             contentDescription = stringResource(id = artResources[currentArtResourceIndex].description)
         )
@@ -104,6 +102,9 @@ fun PixelArtApp() {
             modifier = Modifier.align(Alignment.CenterHorizontally)
         )
         Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceAround
         ) {
             NavButton(
                 buttonFunction = { changeCurrentArtResourceIndex(-1) },
