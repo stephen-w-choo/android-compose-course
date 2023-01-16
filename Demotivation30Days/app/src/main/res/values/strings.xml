@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Demotivationals</string>
+    <string name="day1_name">Tradition</string>
+    <string name="day1_description"> Just Because You\'ve Always Done It That Way Doesn\'t Mean It\'s Not Incredibly Stupid</string>
+    <string name="day2_name">Meetings</string>
+    <string name="day2_description">None Of Us Is As Dumb As All Of Us.</string>
+    <string name="day3_name">Mistakes</string>
+    <string name="day3_description">It Could Be That The Purpose Of Your Life Is Only To Serve As A Warning To Others</string>
+    <string name="day4_name">Adversity</string>
+    <string name="day4_description">That Which Does Not Kill Me Postpones The Inevitable</string>
+    <string name="day5_name">Multitasking</string>
+    <string name="day5_description">The Art Of Doing Twice As Much As You Should Half As Well As You Could.</string>
+    <string name="day6_name">Agony</string>
+    <string name="day6_description">Not All Pain is Gain</string>
+    <string name="day7_name">Ambition</string>
+    <string name="day7_description">The Journey of A Thousand Miles Sometimes Ends Very Badly</string>
+    <string name="day8_name">Limitations</string>
+    <string name="day8_description">Until You Spread Your Wings, You\'ll Have No Idea How Far You Can Walk</string>
+    <string name="day9_name">Irresponsibility</string>
+    <string name="day9_description">No Single Raindrop Believes It Is To Blame For The Flood</string>
+    <string name="day10_name">Leadership</string>
+    <string name="day10_description">True Terror Is To Wake Up One Morning And Discover That Your High School Class Is Running The Country</string>
+</resources>
