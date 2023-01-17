@@ -54,7 +54,8 @@ class GameViewModel : ViewModel() {
             _uiState.update { currentState ->
                 currentState.copy(
                     isGuessedWordWrong = false,
-                    isGameOver = true
+                    isGameOver = true,
+                    score = updatedScore
                 )
             }
         } else {
