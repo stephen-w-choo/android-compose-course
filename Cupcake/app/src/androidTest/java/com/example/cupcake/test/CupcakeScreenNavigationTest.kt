@@ -1,26 +1,27 @@
 package com.example.cupcake.test
 
+import android.icu.util.Calendar
 import androidx.activity.ComponentActivity
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
-import androidx.compose.ui.test.onNodeWithContentDescription
-import androidx.compose.ui.test.onNodeWithText
-import androidx.compose.ui.test.performClick
-import androidx.compose.ui.test.performRotaryScrollInput
 import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.testing.TestNavHostController
 import com.example.cupcake.CupcakeApp
 import com.example.cupcake.CupcakeScreen
-
+import com.example.cupcake.R
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Locale
 
 class CupcakeScreenNavigationTest {
     @get:Rule
     val composeTestRule = createAndroidComposeRule<ComponentActivity>()
+
+
     private lateinit var navController: TestNavHostController
 
     @Before
@@ -30,7 +31,7 @@ class CupcakeScreenNavigationTest {
             navController.navigatorProvider.addNavigator(
                 ComposeNavigator()
             )
-            CupcakeApp()
+            CupcakeApp(navController = navController)
         }
     }
 
@@ -48,8 +49,6 @@ class CupcakeScreenNavigationTest {
         composeTestRule.onNodeWithStringId(com.example.cupcake.R.string.one_cupcake)
             .performClick()
         // first click to select one cupcake
-
-
         composeTestRule.onNodeWithStringId(com.example.cupcake.R.string.chocolate)
             .performClick()
         // second click to select cupcake flavour - clicking next from this point will navigate to the next screen
@@ -77,7 +76,7 @@ class CupcakeScreenNavigationTest {
 
     @Test
     fun cupcakeNavHost_verifyBackNavigationNotShownOnStartOrderScreen() {
-        val backText = composeTestRule.activity.getString(com.example.cupcake.R.string.back_button)
+        val backText = composeTestRule.activity.getString(R.string.back_button)
         composeTestRule.onNodeWithContentDescription(backText).assertDoesNotExist()
     }
 
@@ -90,8 +89,9 @@ class CupcakeScreenNavigationTest {
 
     @Test
     fun cupcakeNavHost_clickUpButtonFromFlavorScreen_navigatesToStartScreen() {
+        val backText = composeTestRule.activity.getString(R.string.back_button)
         navigateToFlavorScreen()
-        composeTestRule.onNodeWithStringId(com.example.cupcake.R.string.back_button)
+        composeTestRule.onNodeWithContentDescription(backText)
             .performClick()
         navController.assertCurrentRouteName(CupcakeScreen.Start.name)
     }
@@ -110,14 +110,14 @@ class CupcakeScreenNavigationTest {
         navController.assertCurrentRouteName(CupcakeScreen.Pickup.name)
     }
 
-//    @Test
-//    fun cupcakeNavHost_clickUpButtonFromPickupScreen_navigatesToFlavorScreen() {
-//        navigateToPickupScreen()
-//        composeTestRule.onNodeWithStringId(com.example.cupcake.R.string.back_button)
-//        navController.assertCurrentRouteName(CupcakeScreen.)
-//    }
-
-
+    @Test
+    fun cupcakeNavHost_clickUpButtonFromPickupScreen_navigatesToFlavorScreen() {
+        val backText = composeTestRule.activity.getString(R.string.back_button)
+        navigateToPickupScreen()
+        composeTestRule.onNodeWithContentDescription(backText)
+            .performClick()
+        navController.assertCurrentRouteName(CupcakeScreen.Flavor.name)
+    }
 
 
 
