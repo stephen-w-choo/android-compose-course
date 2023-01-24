@@ -135,7 +135,6 @@ fun CupcakeApp(
             }
             composable(route = CupcakeScreen.Flavor.name){
                 val context = LocalContext.current // what does this line do?
-                Log.d("myTag", "This is my message")
                 SelectOptionScreen(
                     subtotal = uiState.price,
                     onNextButtonClicked = {
@@ -152,7 +151,6 @@ fun CupcakeApp(
                 )
             }
             composable(route = CupcakeScreen.Pickup.name) {
-                Log.d("myTag", "This is the pickup screen")
                 SelectOptionScreen(
                     subtotal = uiState.price,
                     onNextButtonClicked = {
