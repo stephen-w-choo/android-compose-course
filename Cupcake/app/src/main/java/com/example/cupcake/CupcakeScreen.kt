@@ -119,6 +119,8 @@ fun CupcakeApp(
 
         // The NavHost is a composable that displays a given composable
         // the route shown is based on the route that is given by the navcontroller
+        // essentially just acts as a giant switch statement, but with the advantage  of maintaining
+        // things like a backstack object instead of having to maintain the stack yourself
         NavHost(
             navController = navController,
             startDestination = CupcakeScreen.Start.name,
