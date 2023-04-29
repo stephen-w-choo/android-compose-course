@@ -27,12 +27,13 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.marsphotos.MarsPhotosApplication
 import com.example.marsphotos.data.DefaultMarsPhotosRepository
 import com.example.marsphotos.data.MarsPhotosRepository
+import com.example.marsphotos.network.MarsPhoto
 import kotlinx.coroutines.launch
 import java.io.IOException
 import java.lang.Exception
 
 sealed interface MarsUiState {
-    data class Success(val photos: String): MarsUiState
+    data class Success(val photos: List<MarsPhoto>): MarsUiState
     object Error: MarsUiState
     object Loading: MarsUiState
 }
@@ -60,8 +61,8 @@ class MarsViewModel(
         viewModelScope.launch {
             // launches the API request service in a coroutine to maintain non-blocking behaviour
             marsUiState = try {
-                val listResult = marsPhotosRepository.getMarsPhotos()
-                MarsUiState.Success("Success: ${listResult.size} Mars photos retrieved")
+                val result = marsPhotosRepository.getMarsPhotos()
+                MarsUiState.Success(result)
             }
             catch (e: IOException) {
                 MarsUiState.Error
