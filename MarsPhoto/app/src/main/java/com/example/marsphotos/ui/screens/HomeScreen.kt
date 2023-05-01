@@ -15,6 +15,7 @@
  */
 package com.example.marsphotos.ui.screens
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -33,13 +34,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.marsphotos.R
-import com.example.marsphotos.network.MarsPhoto
-import com.example.marsphotos.ui.theme.MarsPhotosTheme
+import com.example.marsphotos.data.MarsPhoto
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.Card
 
@@ -49,6 +48,7 @@ fun HomeScreen(
     marsUiState: MarsUiState,
     modifier: Modifier = Modifier
 ) {
+
     when (marsUiState) {
         is MarsUiState.Loading -> LoadingScreen(modifier)
         is MarsUiState.Success -> PhotosGridScreen(marsUiState.photos, modifier)
@@ -85,23 +85,8 @@ fun ErrorScreen(modifier: Modifier = Modifier) {
 /**
  * The home screen displaying result of fetching photos.
  */
-@Composable
-fun ResultScreen(marsUiState: String, modifier: Modifier = Modifier) {
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = modifier.fillMaxSize()
-    ) {
-        Text(marsUiState)
-    }
-}
 
-@Preview(showBackground = true)
-@Composable
-fun ResultScreenPreview() {
-    MarsPhotosTheme {
-        ResultScreen(stringResource(R.string.placeholder_result))
-    }
-}
+
 @Composable
 fun MarsPhotoCard(photo: MarsPhoto, modifier: Modifier = Modifier) {
     Card(
@@ -131,6 +116,7 @@ fun PhotosGridScreen(photos: List<MarsPhoto>, modifier: Modifier = Modifier) {
         modifier = modifier.fillMaxWidth(),
         contentPadding = PaddingValues(4.dp),
     ) {
+        Log.d("DEBUG", "photosgridscreen")
         items(items = photos, key = {photo -> photo.id}) {
             photo -> MarsPhotoCard(photo)
         }

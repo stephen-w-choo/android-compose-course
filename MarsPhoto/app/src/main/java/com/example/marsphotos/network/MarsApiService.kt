@@ -1,13 +1,15 @@
 package com.example.marsphotos.network
 
-import com.example.marsphotos.data.AppContainer
+import com.example.marsphotos.network.AppContainer
 import com.example.marsphotos.data.DefaultMarsPhotosRepository
+import com.example.marsphotos.data.MarsPhoto
 import com.example.marsphotos.data.MarsPhotosRepository
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
 import retrofit2.http.GET
+
 
 
 class DefaultAppContainer: AppContainer {

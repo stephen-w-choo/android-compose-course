@@ -15,9 +15,7 @@
  */
 package com.example.marsphotos.ui.screens
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
@@ -25,14 +23,12 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.marsphotos.MarsPhotosApplication
-import com.example.marsphotos.data.DefaultMarsPhotosRepository
 import com.example.marsphotos.data.MarsPhotosRepository
-import com.example.marsphotos.network.MarsPhoto
+import com.example.marsphotos.data.MarsPhoto
 import kotlinx.coroutines.launch
 import java.io.IOException
-import java.lang.Exception
 
-sealed interface MarsUiState {
+interface MarsUiState {
     data class Success(val photos: List<MarsPhoto>): MarsUiState
     object Error: MarsUiState
     object Loading: MarsUiState
@@ -43,7 +39,7 @@ class MarsViewModel(
 ) : ViewModel() {
 
     /** The mutable State that stores the status of the most recent request */
-    var marsUiState: MarsUiState by mutableStateOf(MarsUiState.Loading)
+    var marsUiState: MarsUiState = MarsUiState.Loading
         private set
 
     /**
@@ -60,12 +56,13 @@ class MarsViewModel(
     private fun getMarsPhotos() {
         viewModelScope.launch {
             // launches the API request service in a coroutine to maintain non-blocking behaviour
-            marsUiState = try {
+            try {
                 val result = marsPhotosRepository.getMarsPhotos()
-                MarsUiState.Success(result)
+                Log.d("DEBUG", "success")
+                marsUiState = MarsUiState.Success(result)
             }
             catch (e: IOException) {
-                MarsUiState.Error
+                marsUiState = MarsUiState.Error
             }
         }
     }

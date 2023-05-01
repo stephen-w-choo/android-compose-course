@@ -1,6 +1,6 @@
 package com.example.marsphotos.fake
 
-import com.example.marsphotos.network.MarsPhoto
+import com.example.marsphotos.data.MarsPhoto
 
 object FakeDataSource {
     const val idOne = "img1"
