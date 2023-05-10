@@ -15,6 +15,7 @@
  */
 package com.example.marsphotos.ui.screens
 
+import android.app.Application
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -22,9 +23,9 @@ import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.AP
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.example.marsphotos.MarsPhotosApplication
 import com.example.marsphotos.data.MarsPhotosRepository
 import com.example.marsphotos.data.MarsPhoto
+import com.example.marsphotos.network.DefaultAppContainer
 import kotlinx.coroutines.launch
 import java.io.IOException
 
@@ -32,6 +33,14 @@ interface MarsUiState {
     data class Success(val photos: List<MarsPhoto>): MarsUiState
     object Error: MarsUiState
     object Loading: MarsUiState
+}
+
+class MarsPhotosApplication: Application() {
+    lateinit var container: DefaultAppContainer
+    override fun onCreate() {
+        super.onCreate()
+        container = DefaultAppContainer()
+    }
 }
 
 class MarsViewModel(

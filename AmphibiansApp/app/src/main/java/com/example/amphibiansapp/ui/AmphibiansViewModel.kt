@@ -1,5 +1,6 @@
 package com.example.amphibiansapp.ui
 
+import android.app.Application
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -9,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.AP
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.example.amphibiansapp.AmphibiansApplication
 import com.example.amphibiansapp.data.AmphibiansDataRepository
 import com.example.amphibiansapp.network.AmphibianData
 import com.example.amphibiansapp.network.DefaultAppContainer
@@ -24,6 +24,15 @@ logic in the UI layer and calling the business logic from other layers
 of the hierarchy.
 
  */
+
+class AmphibiansApplication: Application() {
+    lateinit var container: DefaultAppContainer
+
+    override fun onCreate() {
+        super.onCreate()
+        container = DefaultAppContainer()
+    }
+}
 sealed interface AmphibianUiState {
     data class Success(
         val amphibiansData: List<AmphibianData>

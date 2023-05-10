@@ -1,5 +1,6 @@
 package com.example.amphibiansapp.ui.screens
 
+import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
@@ -109,6 +110,8 @@ fun AmphibianDataCard(
                 .fillMaxWidth(),
             contentAlignment = Alignment.Center
         ){
+            // log imgsrc
+            Log.d("AmphibianDataCard", "imgSrc: ${amphibianData.imgSrc}")
             AsyncImage(model = ImageRequest.Builder(context = LocalContext.current)
                 .data(amphibianData.imgSrc)
                 .build(),
