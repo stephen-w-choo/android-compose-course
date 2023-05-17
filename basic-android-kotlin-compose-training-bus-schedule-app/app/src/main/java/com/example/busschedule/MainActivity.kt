@@ -14,28 +14,21 @@
  * limitations under the License.
  */
 
-package com.example.inventory.data
+package com.example.busschedule
 
-import kotlinx.coroutines.flow.Flow
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import com.example.busschedule.ui.BusScheduleApp
+import com.example.busschedule.ui.theme.BusScheduleTheme
 
-class OfflineItemsRepository(val itemDao: ItemDao) : ItemsRepository {
-    override fun getAllItemsStream(): Flow<List<Item>> {
-        return itemDao.getAllItems()
-    }
-
-    override fun getItemStream(id: Int): Flow<Item?> {
-        return itemDao.getItem(id)
-    }
-
-    override suspend fun insertItem(item: Item) {
-        return itemDao.insert(item)
-    }
-
-    override suspend fun deleteItem(item: Item) {
-        itemDao.delete(item)
-    }
-
-    override suspend fun updateItem(item: Item) {
-        return itemDao.update(item)
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            BusScheduleTheme {
+                BusScheduleApp()
+            }
+        }
     }
 }

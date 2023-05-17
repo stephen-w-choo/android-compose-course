@@ -14,28 +14,20 @@
  * limitations under the License.
  */
 
-package com.example.inventory.data
+package com.example.busschedule.data
 
-import kotlinx.coroutines.flow.Flow
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-class OfflineItemsRepository(val itemDao: ItemDao) : ItemsRepository {
-    override fun getAllItemsStream(): Flow<List<Item>> {
-        return itemDao.getAllItems()
-    }
+@Entity
+data class Schedule(
+    @PrimaryKey(autoGenerate = true)
+    val id: Int,
 
-    override fun getItemStream(id: Int): Flow<Item?> {
-        return itemDao.getItem(id)
-    }
+    @ColumnInfo(name = "stop_name")
+    val stopName: String,
 
-    override suspend fun insertItem(item: Item) {
-        return itemDao.insert(item)
-    }
-
-    override suspend fun deleteItem(item: Item) {
-        itemDao.delete(item)
-    }
-
-    override suspend fun updateItem(item: Item) {
-        return itemDao.update(item)
-    }
-}
+    @ColumnInfo(name = "arrival_time")
+    val arrivalTimeInMillis: Int
+)

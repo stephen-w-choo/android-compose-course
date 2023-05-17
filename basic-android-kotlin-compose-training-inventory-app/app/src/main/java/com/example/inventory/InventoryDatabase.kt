@@ -37,6 +37,4 @@ abstract class InventoryDatabase: RoomDatabase() {
             }
         }
     }
-
-
 }

@@ -14,28 +14,14 @@
  * limitations under the License.
  */
 
-package com.example.inventory.data
+package com.example.busschedule.ui.theme
 
-import kotlinx.coroutines.flow.Flow
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Shapes
+import androidx.compose.ui.unit.dp
 
-class OfflineItemsRepository(val itemDao: ItemDao) : ItemsRepository {
-    override fun getAllItemsStream(): Flow<List<Item>> {
-        return itemDao.getAllItems()
-    }
-
-    override fun getItemStream(id: Int): Flow<Item?> {
-        return itemDao.getItem(id)
-    }
-
-    override suspend fun insertItem(item: Item) {
-        return itemDao.insert(item)
-    }
-
-    override suspend fun deleteItem(item: Item) {
-        itemDao.delete(item)
-    }
-
-    override suspend fun updateItem(item: Item) {
-        return itemDao.update(item)
-    }
-}
+val Shapes = Shapes(
+    small = RoundedCornerShape(4.dp),
+    medium = RoundedCornerShape(4.dp),
+    large = RoundedCornerShape(0.dp)
+)

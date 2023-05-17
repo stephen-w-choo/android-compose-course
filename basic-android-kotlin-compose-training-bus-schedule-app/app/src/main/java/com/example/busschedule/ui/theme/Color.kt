@@ -14,28 +14,11 @@
  * limitations under the License.
  */
 
-package com.example.inventory.data
+package com.example.busschedule.ui.theme
 
-import kotlinx.coroutines.flow.Flow
+import androidx.compose.ui.graphics.Color
 
-class OfflineItemsRepository(val itemDao: ItemDao) : ItemsRepository {
-    override fun getAllItemsStream(): Flow<List<Item>> {
-        return itemDao.getAllItems()
-    }
-
-    override fun getItemStream(id: Int): Flow<Item?> {
-        return itemDao.getItem(id)
-    }
-
-    override suspend fun insertItem(item: Item) {
-        return itemDao.insert(item)
-    }
-
-    override suspend fun deleteItem(item: Item) {
-        itemDao.delete(item)
-    }
-
-    override suspend fun updateItem(item: Item) {
-        return itemDao.update(item)
-    }
-}
+val Purple200 = Color(0xFFBB86FC)
+val Purple500 = Color(0xFF6200EE)
+val Purple700 = Color(0xFF3700B3)
+val Teal200 = Color(0xFF03DAC5)
