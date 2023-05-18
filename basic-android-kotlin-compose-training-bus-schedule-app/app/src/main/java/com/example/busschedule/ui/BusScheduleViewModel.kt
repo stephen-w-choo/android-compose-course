@@ -18,39 +18,53 @@ package com.example.busschedule.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
+import com.example.busschedule.BusScheduleApplication
+import com.example.busschedule.data.BusScheduleDao
 import com.example.busschedule.data.Schedule
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
-class BusScheduleViewModel(): ViewModel() {
+class BusScheduleViewModel(
+//    private val busScheduleRepository: OfflineBusScheduleRepository
+    private val busScheduleDao: BusScheduleDao
+): ViewModel() {
     // Get example bus schedule from Room DB
-    fun getFullSchedule(): Flow<List<Schedule>> = flowOf(
-        listOf(
-            Schedule(
-                1,
-                "Example Street",
-                0
-            )
-        )
-    )
+
+
+    fun getFullSchedule(): Flow<List<Schedule>> {
+        return busScheduleDao.getAllBusStops()
+//        return flowOf(
+//            listOf(
+//                Schedule(
+//                    1,
+//                    "Example Street",
+//                    0
+//                )
+//            )
+//        )
+    }
     // Get example bus schedule by stop
-    fun getScheduleFor(stopName: String): Flow<List<Schedule>> =
-        flowOf(
-            listOf(
-                Schedule(
-                    1,
-                    "Example Street",
-                    0
-                )
-            )
-        )
+    fun getScheduleFor(stopName: String): Flow<List<Schedule>> {
+        return busScheduleDao.getBusStop(stopName)
+//        flowOf(
+//            listOf(
+//                Schedule(
+//                    1,
+//                    "Example Street",
+//                    0
+//                )
+//            )
+//        )
+    }
 
     companion object {
         val factory : ViewModelProvider.Factory = viewModelFactory {
             initializer {
-                BusScheduleViewModel()
+                val application = (this[APPLICATION_KEY] as BusScheduleApplication)
+                BusScheduleViewModel(application.database.busScheduleDao())
             }
         }
     }

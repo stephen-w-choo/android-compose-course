@@ -29,5 +29,5 @@ class InventoryApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         container = AppDataContainer(this)
-    }
+    }-p;./
 }

@@ -21,10 +21,15 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.example.busschedule.ui.BusScheduleApp
 import com.example.busschedule.ui.theme.BusScheduleTheme
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        GlobalScope.launch {
+            BusScheduleDatabase.getDatabase(applicationContext).busScheduleDao().getAllBusStops()
+        }
         setContent {
             BusScheduleTheme {
                 BusScheduleApp()

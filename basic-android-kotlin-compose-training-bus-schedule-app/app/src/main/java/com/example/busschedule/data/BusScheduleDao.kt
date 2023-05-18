@@ -12,7 +12,7 @@ interface BusScheduleDao {
 
     // Retrieve single item if given a bus stop name
     @Query("SELECT * FROM schedule WHERE stop_name = :stopName")
-    fun getBusStop(stopName: String): Flow<Schedule>
+    fun getBusStop(stopName: String): Flow<List<Schedule>>
 }
 
 // my question is about client facing - people oriented roles
